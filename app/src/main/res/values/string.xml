@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AlertDialog</string>
+    <string name="action_settings">Settings</string>
+    <string name="dialog">Dialog</string>
+    <string-array name="numbers">
+        <item>Попытаться снова</item>
+        <item>В главное меню</item>
+
+    </string-array>
+</resources>

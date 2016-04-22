@@ -2,24 +2,33 @@ package com.example.ivanlevcugov.myapplication;
 
 import android.app.AlertDialog;
 import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
+
+import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface.OnClickListener;
+
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewDebug;
+
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class mode1 extends AppCompatActivity {
+    AlertDialog.Builder ad;
+    Context context;
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
     int mCounter;
+
 
     public SharedPreferences mSettings;
     int record;
@@ -53,6 +62,26 @@ public class mode1 extends AppCompatActivity {
         Intent intent=getIntent();
         mSettings=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
+        context =mode1.this;
+        String msg = "Game Over";
+        String button11 = "Попытваться снова";
+        String button22 = "В главное меню";
+        ad = new AlertDialog.Builder(context);
+        ad.setTitle(msg);
+        ad.setPositiveButton(button11, new OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                Toast.makeText(context, "Нажмите начать игру",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        ad.setNegativeButton(button22, new OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                Intent intent = new Intent(mode1.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        ad.setCancelable(false);
 
         countdownDisplay = (TextView) findViewById(R.id.textView4);
 
@@ -163,7 +192,8 @@ public class mode1 extends AppCompatActivity {
                     textView.setText(correct[n]);
 
 
-                    countdownDisplay.setText("В следующий раз повезет больше! ");
+                    ad.setMessage("В следующий раз повезет больше! ");
+                    countdownDisplay.setText("Time");
 
                     textView5.setText("Ваши жизни " + lifes);
                     textView3.setText("Рекорд" + record);
@@ -177,6 +207,7 @@ public class mode1 extends AppCompatActivity {
                     SharedPreferences.Editor editor = mSettings.edit();
                     editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
                     editor.apply();
+                    ad.show();
 
                   }}
         }.start();
@@ -238,8 +269,8 @@ if (lifes>0) {pok=r.nextInt(2)+0;
 
     }}
             else{
-
-    countdownDisplay.setText("Больше стараний!");
+    countdownDisplay.setText("Time");
+    ad.setMessage("Ты можешь лучше!");
     if (k>record) {
         record=k;
     }
@@ -251,6 +282,7 @@ if (lifes>0) {pok=r.nextInt(2)+0;
 
     button2.setEnabled(false);
             button3.setEnabled(false);
+    ad.show();
     timer.cancel();
 }}
 mCounter=record;
@@ -313,7 +345,8 @@ mCounter=record;
 
                 }}
             else{
-                countdownDisplay.setText("Больше стараний!");
+                countdownDisplay.setText("Time");
+                ad.setMessage("Больше стараний!");
                 if (k>record) {
                     record=k;
                 }
@@ -325,6 +358,7 @@ mCounter=record;
 
                 button2.setEnabled(false);
                 button3.setEnabled(false);
+                ad.show();
                 timer.cancel();
             }}
         mCounter=record;
@@ -357,22 +391,22 @@ mCounter=record;
 
     }
 
-   // protected void onStart() {
-     //   super.onStart();
-       // if (mSettings.contains(APP_PREFERENCES)){
-         //   record =mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
+   /* protected void onStart() {
+        super.onStart();
+        if (mSettings.contains(APP_PREFERENCES)){
+            record =mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
 
 
-        //}
-    //}
+        }
+    }
 
-//    protected void onStop(){
-  //      super.onStop();
-    //    SharedPreferences.Editor editor = mSettings.edit();
-      //  editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
-//
-  //      editor.apply();
-    //}
+    protected void onStop(){
+        super.onStop();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
+
+        editor.apply();
+    }*/
 
 
 

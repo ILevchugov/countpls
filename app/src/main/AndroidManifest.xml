@@ -16,6 +16,8 @@
         </activity>
         <activity android:name=".mode1" >
         </activity>
+        <activity android:name=".SelectDialog" >
+        </activity>
     </application>
 
 </manifest>
