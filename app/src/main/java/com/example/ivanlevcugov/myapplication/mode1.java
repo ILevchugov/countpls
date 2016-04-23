@@ -1,26 +1,20 @@
 package com.example.ivanlevcugov.myapplication;
-
 import android.app.AlertDialog;
 import android.content.Context;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.support.v7.app.AppCompatActivity;
 import android.content.DialogInterface.OnClickListener;
-
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
-
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Random;
+
 
 public class mode1 extends AppCompatActivity {
     AlertDialog.Builder ad;
