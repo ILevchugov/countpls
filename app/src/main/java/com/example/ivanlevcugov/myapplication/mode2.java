@@ -32,10 +32,11 @@ public class mode2 extends AppCompatActivity {
     private CountDownTimer timer;
 
     //record
-    public SharedPreferences mSettings;
-    public static final String APP_PREFERENCES = "mysettings";
-    public static final String APP_PREFERENCES_COUNTER = "counter";
-    int mCounter;
+    public SharedPreferences mSettings2;
+
+    public static final String APP_PREFERENCES = "mysettings1";
+    public static final String APP_PREFERENCES_COUNTER = "counter1";
+    int mCounter1;
 
     //всплывающее окно
     AlertDialog.Builder ad;
@@ -49,6 +50,7 @@ public class mode2 extends AppCompatActivity {
       /*  Intent intent = new Intent(this, prosto.class);
         intent.putExtra("result", result);
         startActivity(intent);*/
+        ad.setTitle("ваш результат" + result);
         ad.show(); //всплывающее
     }
     private void showTimer1(int countdownMillis)
@@ -459,7 +461,7 @@ public class mode2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode2);
-        mSettings=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mSettings2=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         a=0;b=0;c=0;result=0;x=0;
         button1 = (Button) findViewById(R.id.button1);//lefttop
         button2 = (Button) findViewById(R.id.button2);//righttop
@@ -474,27 +476,18 @@ public class mode2 extends AppCompatActivity {
         context = mode2.this;
         String title = "your result: "+result;
         String message = "You lost. Don't worry, play again?";
-        String button1String = "No, thanks";
-        String button2String = "Yeah, let's go";
+        String button1String = "В главное меню";
+        String button2String = "Начать снова";
 
         ad = new AlertDialog.Builder(context);
         ad.setTitle(title);  // заголовок
         ad.setMessage(message); // сообщение
         ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы сделали правильный выбор",
-                        Toast.LENGTH_LONG).show();
+            public void onClick(DialogInterface dialog, int arg1) { //главное меню
 
-                life = 3;
-                try {
-                    showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
-                } catch (NumberFormatException e) {
-                    // method ignores invalid (non-integer) input and waits
-                    // for something it can use
-                }
-                lifetv.setText("lifes: "+life);
-                result = 0;
-                resultview.setText(""+result);
+                Intent intent = new Intent(mode2.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
         ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
@@ -514,7 +507,7 @@ public class mode2 extends AppCompatActivity {
                 resultview.setText(""+result);
             }
         });
-        ad.setCancelable(true);
+        ad.setCancelable(false);
         ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
             public void onCancel(DialogInterface dialog) {
                 Toast.makeText(context, "Жаль", Toast.LENGTH_LONG).show();
@@ -544,7 +537,7 @@ public class mode2 extends AppCompatActivity {
         r = new Random();
         life = 3;
         lifetv.setText("lifes:"+life);
-        record =mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
+        record =mSettings2.getInt(APP_PREFERENCES_COUNTER, 0);
         recordview.setText("record: "+record);
         numgenerate();//generate generate
     }
@@ -566,9 +559,9 @@ public class mode2 extends AppCompatActivity {
             {
                 record = result;
                 recordview.setText("record: "+record);
-                mCounter=record;
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
+                mCounter1=record;
+                SharedPreferences.Editor editor = mSettings2.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER, mCounter1);
                 editor.apply();
 
             }
@@ -607,9 +600,9 @@ public class mode2 extends AppCompatActivity {
             {
                 record = result;
                 recordview.setText("record: "+record);
-                mCounter=record;
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
+                mCounter1=record;
+                SharedPreferences.Editor editor = mSettings2.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER, mCounter1);
                 editor.apply();
 
             }
@@ -648,9 +641,9 @@ public class mode2 extends AppCompatActivity {
             {
                 record = result;
                 recordview.setText("record: "+record);
-                mCounter=record;
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
+                mCounter1=record;
+                SharedPreferences.Editor editor = mSettings2.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER, mCounter1);
                 editor.apply();
 
             }
@@ -689,9 +682,9 @@ public class mode2 extends AppCompatActivity {
             {
                 record = result;
                 recordview.setText("record: "+record);
-                mCounter=record;
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER, mCounter);
+                mCounter1=record;
+                SharedPreferences.Editor editor = mSettings2.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER, mCounter1);
                 editor.apply();
 
             }

@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rejim1(View view) {
-        Intent intent = new Intent(MainActivity.this, mode2.class);
+        Intent intent = new Intent(MainActivity.this, mode1.class);
         startActivity(intent);
 
     }
 
     public void rejim2(View view) {
-        Intent intent = new Intent(MainActivity.this, mode1.class);
+        Intent intent = new Intent(MainActivity.this, mode2.class);
         startActivity(intent);
 
     }
