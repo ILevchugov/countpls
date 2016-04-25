@@ -23,6 +23,7 @@
         android:layout_width="110dp"
         android:layout_height="50dp"
         android:id="@+id/button1"
+
         android:background="@drawable/button3"
         android:onClick="onClick1"
         android:layout_centerVertical="true"
@@ -34,6 +35,7 @@
         android:layout_height="50dp"
         android:id="@+id/button2"
         android:onClick="onClick2"
+
         android:background="@drawable/button3"
         android:layout_alignTop="@+id/button1"
         android:layout_alignParentRight="true"
@@ -44,6 +46,7 @@
         android:layout_height="50dp"
         android:id="@+id/button3"
         android:onClick="onClick3"
+
         android:background="@drawable/button3"
         android:layout_below="@+id/button1"
         android:layout_alignParentLeft="true"
@@ -53,6 +56,7 @@
         android:layout_width="110dp"
         android:layout_height="50dp"
         android:id="@+id/button4"
+
         android:layout_alignTop="@+id/button3"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
@@ -98,6 +102,18 @@
         android:background="@drawable/back"
         android:layout_toRightOf="@+id/recordView"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"/>
+
+
+    <ImageButton
+        android:layout_marginTop="400dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/begin"
+        android:onClick="begin"
+        android:background="@drawable/begin"
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:layout_alignParentLeft="true"/>
 </RelativeLayout>
 

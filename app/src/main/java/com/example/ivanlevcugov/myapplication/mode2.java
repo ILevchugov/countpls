@@ -1,24 +1,28 @@
 package com.example.ivanlevcugov.myapplication;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 
-public class mode2 extends AppCompatActivity {
+public class mode2 extends Activity {
 
 
-    TextView button1, button2, button3, button4;
+    Button button1, button2, button3, button4;
+    ImageButton begin;
     TextView tv, resultview, lifetv, recordview;
     Random r;
     int a, b, c, i, x, r1, life, result, record;
@@ -46,7 +50,13 @@ public class mode2 extends AppCompatActivity {
 
     public void end()
     {
+        begin.setEnabled(true);
+        countdownDisplay.setText("Timer");
         timer.cancel();
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+        button3.setEnabled(false);
+        button4.setEnabled(false);
       /*  Intent intent = new Intent(this, prosto.class);
         intent.putExtra("result", result);
         startActivity(intent);*/
@@ -467,6 +477,7 @@ public class mode2 extends AppCompatActivity {
         button2 = (Button) findViewById(R.id.button2);//righttop
         button3 = (Button) findViewById(R.id.button3);//leftbottom
         button4 = (Button) findViewById(R.id.button4);//rightbottom
+        begin = (ImageButton) findViewById(R.id.begin);
         tv   = (TextView) findViewById(R.id.textView);//answer right now
         lifetv   = (TextView) findViewById(R.id.textView3);//life
         resultview = (TextView) findViewById(R.id.textView2);//result right now
@@ -496,15 +507,11 @@ public class mode2 extends AppCompatActivity {
                /* Intent intent = new Intent(mode2.this, prosto.class);
                 startActivity(intent);*/
                 life = 3;
-                try {
-                    showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
-                } catch (NumberFormatException e) {
-                    // method ignores invalid (non-integer) input and waits
-                    // for something it can use
-                }
-                lifetv.setText("lifes: "+life);
+
+
+                lifetv.setText("lifes: " + life);
                 result = 0;
-                resultview.setText(""+result);
+                resultview.setText("" + result);
             }
         });
         ad.setCancelable(false);
@@ -520,26 +527,27 @@ public class mode2 extends AppCompatActivity {
                     // method ignores invalid (non-integer) input and waits
                     // for something it can use
                 }
-                lifetv.setText("lifes: "+life);
+                lifetv.setText("lifes: " + life);
                 result = 0;
-                resultview.setText(""+result);
+                resultview.setText("" + result);
             }
         });
 
 
 
-        try {
+        /*try {
             showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
         } catch (NumberFormatException e) {
             // method ignores invalid (non-integer) input and waits
             // for something it can use
-        }
+        }*/
         r = new Random();
         life = 3;
         lifetv.setText("lifes:"+life);
         record =mSettings2.getInt(APP_PREFERENCES_COUNTER, 0);
         recordview.setText("record: "+record);
         numgenerate();//generate generate
+        begin.setEnabled(true);
     }
 
 
@@ -706,9 +714,32 @@ public class mode2 extends AppCompatActivity {
             // for something it can use
         }
     }
-    public void back()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void begin(View view) {
+        begin.setEnabled(false);
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
+        button4.setEnabled(true);
+        numgenerate();
+        try {
+            showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
+        } catch (NumberFormatException e) {
+            // method ignores invalid (non-integer) input and waits
+            // for something it can use
+        }
+
     }
+
+    public void back(View view)
+    {
+        timer.cancel();
+        Intent intent = new Intent(mode2.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onBackPressed() {
+        timer.cancel();
+        finish();
+    }
+
 }

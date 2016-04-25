@@ -6,8 +6,11 @@
         android:allowBackup="true"
         android:icon="@drawable/name"
         android:label="Посчитай"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
+        <activity android:name=".MainActivity">
+
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

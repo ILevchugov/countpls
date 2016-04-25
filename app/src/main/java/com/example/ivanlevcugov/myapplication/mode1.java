@@ -1,9 +1,11 @@
 package com.example.ivanlevcugov.myapplication;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
@@ -16,7 +18,10 @@ import android.widget.Toast;
 import java.util.Random;
 
 
-public class mode1 extends AppCompatActivity {
+public class mode1 extends Activity {
+
+
+
     AlertDialog.Builder ad;
     Context context;
     public static final String APP_PREFERENCES = "mysettings";
@@ -54,6 +59,12 @@ public class mode1 extends AppCompatActivity {
 
         setContentView(R.layout.activity_mode1);
         Intent intent=getIntent();
+
+
+
+        // Remember that you should never show the action bar if the
+// status bar is hidden, so hide that too if necessary.
+
         mSettings=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         context =mode1.this;
@@ -383,6 +394,10 @@ mCounter=record;
         }
 
 
+    }
+    public void onBackPressed() {
+        timer.cancel();
+        finish();
     }
 
    /* protected void onStart() {
