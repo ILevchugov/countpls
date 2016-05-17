@@ -8,6 +8,7 @@ import android.content.Intent;
 
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +57,7 @@ public class mode1 extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        overridePendingTransition(R.anim.diagonaltranslate, R.anim.alpha);
         setContentView(R.layout.activity_mode1);
         Intent intent=getIntent();
 
@@ -89,12 +90,22 @@ public class mode1 extends Activity {
         ad.setCancelable(false);
 
         countdownDisplay = (TextView) findViewById(R.id.textView4);
+        countdownDisplay.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
 
 
         textView = (TextView) findViewById(R.id.textView);
+        textView.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
         textView2 = (TextView) findViewById(R.id.textView2);
+        textView2.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
         textView3 = (TextView) findViewById(R.id.textView3);
+        textView3.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
         textView5 = (TextView) findViewById(R.id.textView5);
+        textView5.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
         button1 = (Button) findViewById(R.id.button3);
         button2 = (ImageButton) findViewById(R.id.button); //нет
         button3 = (ImageButton) findViewById(R.id.button2);//да
@@ -104,10 +115,10 @@ public class mode1 extends Activity {
         button2.setEnabled(false);
         button3.setEnabled(false);
         record =mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
-        textView3.setText("Рекорд"+record);
-        textView.setText("тут будут примеры ");
-        textView2.setText("Счет" + k);
-        textView5.setText("Ваши жизни" + lifes);
+        textView3.setText("Record"+record);
+        textView.setText("Example ");
+        textView2.setText("Score" + k);
+        textView5.setText("Lifes" + lifes);
 
 
 
@@ -396,8 +407,9 @@ mCounter=record;
 
     }
     public void onBackPressed() {
-        timer.cancel();
-        finish();
+        if(timer != null) { timer.cancel(); }
+finish();
+
     }
 
    /* protected void onStart() {

@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.media.Image;
-import android.os.CountDownTimer;
-
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,15 +17,16 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class mode2 extends Activity {
-
-
+public class lvl1 extends Activity {
     Button button1, button2, button3, button4;
     ImageButton begin;
     TextView tv, resultview, lifetv, recordview;
     Random r;
+    int pokazatel;
     int a, b, c, i, x, r1, life, result, record;
     int n = 4;
+    String records;
+    String counters;
     int mass[] = new int[n];
     String s1, s2;
     // timer
@@ -39,8 +38,8 @@ public class mode2 extends Activity {
     //record
     public SharedPreferences mSettings2;
 
-    public static final String APP_PREFERENCES = "mysettings1";
-    public static final String APP_PREFERENCES_COUNTER = "counter1";
+    public static  String APP_PREFERENCES; //= "mysettings2";
+    public static  String APP_PREFERENCES_COUNTER;// = "counter2";
     int mCounter1;
 
     //всплывающее окно
@@ -98,10 +97,151 @@ public class mode2 extends Activity {
         }.start();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lvl1);
+        pokazatel = getIntent().getExtras().getInt("lvl",pokazatel);
+        if (pokazatel==1){
+            records="mysettings2";
+            counters="counter2";
+             r1=10;
+
+        }
+        if (pokazatel==2){
+            records="mysettings3";
+            counters="counter3";
+            r1=50;
+
+        }
+        if (pokazatel==3){
+            records="mysettings4";
+            counters="counter4";
+            r1=100;
+
+        }
+        if (pokazatel==4){
+            records="mysettings5";
+            counters="counter5";
+            r1=500;
+
+        }
+        if (pokazatel==5){
+            records="mysettings6";
+            counters="counter6";
+            r1=1000;
+
+        }
+        APP_PREFERENCES=records;
+        APP_PREFERENCES_COUNTER=counters;
+        mSettings2=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        a=0;b=0;c=0;result=0;x=0;
+        button1 = (Button) findViewById(R.id.button1);//lefttop
+        button1.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        button1.setEnabled(false);
+        button2 = (Button) findViewById(R.id.button2);//righttop
+        button2.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        button2.setEnabled(false);
+        button3 = (Button) findViewById(R.id.button3);//leftbottom
+        button3.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        button3.setEnabled(false);
+        button4 = (Button) findViewById(R.id.button4);//rightbottom
+        button4.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        button4.setEnabled(false);
+        begin = (ImageButton) findViewById(R.id.begin);
+        tv   = (TextView) findViewById(R.id.textView);//answer right now
+        tv.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        lifetv   = (TextView) findViewById(R.id.textView3);//life
+        lifetv.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        resultview = (TextView) findViewById(R.id.textView2);//result right now
+        resultview.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        recordview = (TextView) findViewById(R.id.recordView);//result right now
+        recordview.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+        countdownDisplay = (TextView) findViewById(R.id.timer);//timer
+        countdownDisplay.setTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/font1.ttf"));
+
+        context = lvl1.this;
+        String title = "your result: "+result;
+        String message = "You lost. Don't worry, play again?";
+        String button1String = "В главное меню";
+        String button2String = "Начать снова";
+
+        ad = new AlertDialog.Builder(context);
+        ad.setTitle(title);  // заголовок
+        ad.setMessage(message); // сообщение
+        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) { //главное меню
+
+                Intent intent = new Intent(lvl1.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                Toast.makeText(context, "Жаль!", Toast.LENGTH_LONG).show();
+               /* Intent intent = new Intent(mode2.this, prosto.class);
+                startActivity(intent);*/
+                life = 3;
+
+
+                lifetv.setText("lifes: " + life);
+                result = 0;
+                resultview.setText("" + result);
+            }
+        });
+        ad.setCancelable(false);
+        ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+                Toast.makeText(context, "Жаль", Toast.LENGTH_LONG).show();
+             /*  Intent intent = new Intent(mode2.this, prosto.class);
+                startActivity(intent);*/
+                life = 3;
+                try {
+                    showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
+                } catch (NumberFormatException e) {
+                    // method ignores invalid (non-integer) input and waits
+                    // for something it can use
+                }
+                lifetv.setText("lifes: " + life);
+                result = 0;
+                resultview.setText("" + result);
+            }
+        });
+
+
+
+        /*try {
+            showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
+        } catch (NumberFormatException e) {
+            // method ignores invalid (non-integer) input and waits
+            // for something it can use
+        }*/
+        r = new Random();
+        life = 3;
+        lifetv.setText("lifes:"+life);
+        countdownDisplay.setText("Time");
+        tv.setText("Examples");
+        record =mSettings2.getInt(APP_PREFERENCES_COUNTER, 0);
+        recordview.setText("record: "+record);
+        //numgenerate();//generate generate
+        begin.setEnabled(true);
+
+    }
     public void generate1()//generate +
     {
-        a = r.nextInt(35)+1;
-        b = r.nextInt(35)+1;
+
+        a = r.nextInt(r1)+1;
+        b = r.nextInt(r1)+1;
         c = a + b;
 
         for (i = 0; i<n-1; i++)
@@ -187,395 +327,6 @@ public class mode2 extends Activity {
         }
 
     }
-
-    public void generate2()//generate -
-    {
-        a = r.nextInt(35)+1;
-        b = r.nextInt(35)+1;
-        c = a + b;
-
-        for (i = 0; i<n-1; i++)
-        {
-            if (b<=15)
-            {
-                mass[i] = b + (r.nextInt(10)-5);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if ((b>15) && (b<50))
-            {
-
-                mass[i] = b + (r.nextInt(20)-10);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if (b>=50)
-            {
-                mass[i] = b + (r.nextInt(20)-10);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-        }
-        tv.setText(c+"-"+a+"=");
-        resultview.setText(""+result);
-        mass[3] = b;
-        i = r.nextInt(4);
-
-        switch (i)
-        {
-            case 0:
-            {
-                button1.setText(""+mass[0]);
-                button2.setText(""+mass[1]);
-                button3.setText(""+mass[2]);
-                button4.setText(""+mass[3]);
-                break;
-            }
-            case 1:
-            {
-
-                button1.setText(""+mass[1]);
-                button2.setText(""+mass[2]);
-                button3.setText(""+mass[3]);
-                button4.setText(""+mass[0]);
-                break;
-            }
-            case 2:
-            {
-                button1.setText(""+mass[2]);
-                button2.setText(""+mass[3]);
-                button3.setText(""+mass[0]);
-                button4.setText(""+mass[1]);
-                break;
-
-            }
-            case 3:
-            {
-                button1.setText(""+mass[3]);
-                button2.setText(""+mass[0]);
-                button3.setText(""+mass[1]);
-                button4.setText(""+mass[2]);
-                break;
-            }
-        }
-
-    }
-
-    public void generate3()// generate *
-    {
-        a = r.nextInt(11)+2;
-        b = r.nextInt(11)+2;
-        c = a * b;
-        for (i = 0; i<n-1; i++)
-        {
-            if (c<=15)
-            {
-                mass[i] = c + (r.nextInt(10)-5);
-                if (mass[i] == c)
-                {
-                    while ((mass[i] == c)&&(mass[i]<0))
-                    {
-                        mass[i] = c + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if ((c>15) && (c<50))
-            {
-
-                mass[i] = c + (r.nextInt(20)-10);
-                if (mass[i] == c)
-                {
-                    while ((mass[i] == c)&&(mass[i]<0))
-                    {
-                        mass[i] = c + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if (c>=50)
-            {
-                mass[i] = c + (r.nextInt(20)-10);
-                if (mass[i] == c)
-                {
-                    while ((mass[i] == c)&&(mass[i]<0))
-                    {
-                        mass[i] = c + (r.nextInt(10)-5);
-                    }
-                }
-            }
-        }
-        tv.setText(a+"*"+b+"=");
-        resultview.setText(""+result);
-        mass[3] = c;
-        i = r.nextInt(4);
-
-        switch (i)
-        {
-            case 0:
-            {
-                button1.setText(""+mass[0]);
-                button2.setText(""+mass[1]);
-                button3.setText(""+mass[2]);
-                button4.setText(""+mass[3]);
-                break;
-            }
-            case 1:
-            {
-
-                button1.setText(""+mass[1]);
-                button2.setText(""+mass[2]);
-                button3.setText(""+mass[3]);
-                button4.setText(""+mass[0]);
-                break;
-            }
-            case 2:
-            {
-                button1.setText(""+mass[2]);
-                button2.setText(""+mass[3]);
-                button3.setText(""+mass[0]);
-                button4.setText(""+mass[1]);
-                break;
-
-            }
-            case 3:
-            {
-                button1.setText(""+mass[3]);
-                button2.setText(""+mass[0]);
-                button3.setText(""+mass[1]);
-                button4.setText(""+mass[2]);
-                break;
-            }
-        }
-    }
-
-    public void generate4()//generate /
-    {
-        a = r.nextInt(11)+2;
-        b = r.nextInt(11)+2;
-        c = a * b;
-
-        for (i = 0; i<n-1; i++)
-        {
-            if (b<=15)
-            {
-                mass[i] = b + (r.nextInt(10)-5);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if ((b>15) && (b<50))
-            {
-
-                mass[i] = b + (r.nextInt(20)-10);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-
-            if (b>=50)
-            {
-                mass[i] = b + (r.nextInt(20)-10);
-                if (mass[i] == b)
-                {
-                    while (mass[i] == b)
-                    {
-                        mass[i] = b + (r.nextInt(10)-5);
-                    }
-                }
-            }
-        }
-        tv.setText(c+"/"+a+"=");
-        resultview.setText(""+result);
-        mass[3] = b;
-        i = r.nextInt(4);
-
-        switch (i)
-        {
-            case 0:
-            {
-                button1.setText(""+mass[0]);
-                button2.setText(""+mass[1]);
-                button3.setText(""+mass[2]);
-                button4.setText(""+mass[3]);
-                break;
-            }
-            case 1:
-            {
-
-                button1.setText(""+mass[1]);
-                button2.setText(""+mass[2]);
-                button3.setText(""+mass[3]);
-                button4.setText(""+mass[0]);
-                break;
-            }
-            case 2:
-            {
-                button1.setText(""+mass[2]);
-                button2.setText(""+mass[3]);
-                button3.setText(""+mass[0]);
-                button4.setText(""+mass[1]);
-                break;
-
-            }
-            case 3:
-            {
-                button1.setText(""+mass[3]);
-                button2.setText(""+mass[0]);
-                button3.setText(""+mass[1]);
-                button4.setText(""+mass[2]);
-                break;
-            }
-        }
-
-    }
-
-    public void numgenerate()//generate generate
-    {
-        r1 = r.nextInt(4);
-        switch (r1)
-        {
-            case 0:generate1();break;
-            case 1:generate2();break;
-            case 2:generate3();break;
-            case 3:generate4();break;
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mode2);
-        mSettings2=getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        a=0;b=0;c=0;result=0;x=0;
-        button1 = (Button) findViewById(R.id.button1);//lefttop
-        button1.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        button1.setEnabled(false);
-        button2 = (Button) findViewById(R.id.button2);//righttop
-        button2.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        button2.setEnabled(false);
-        button3 = (Button) findViewById(R.id.button3);//leftbottom
-        button3.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        button3.setEnabled(false);
-        button4 = (Button) findViewById(R.id.button4);//rightbottom
-        button4.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        button4.setEnabled(false);
-        begin = (ImageButton) findViewById(R.id.begin);
-        tv   = (TextView) findViewById(R.id.textView);//answer right now
-        tv.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        lifetv   = (TextView) findViewById(R.id.textView3);//life
-        lifetv.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        resultview = (TextView) findViewById(R.id.textView2);//result right now
-        resultview.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        recordview = (TextView) findViewById(R.id.recordView);//result right now
-        recordview.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-        countdownDisplay = (TextView) findViewById(R.id.timer);//timer
-        countdownDisplay.setTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/font1.ttf"));
-
-        context = mode2.this;
-        String title = "your result: "+result;
-        String message = "You lost. Don't worry, play again?";
-        String button1String = "В главное меню";
-        String button2String = "Начать снова";
-
-        ad = new AlertDialog.Builder(context);
-        ad.setTitle(title);  // заголовок
-        ad.setMessage(message); // сообщение
-        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) { //главное меню
-
-                Intent intent = new Intent(mode2.this, MainActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Жаль!", Toast.LENGTH_LONG).show();
-               /* Intent intent = new Intent(mode2.this, prosto.class);
-                startActivity(intent);*/
-                life = 3;
-
-
-                lifetv.setText("lifes: " + life);
-                result = 0;
-                resultview.setText("" + result);
-            }
-        });
-        ad.setCancelable(false);
-        ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                Toast.makeText(context, "Жаль", Toast.LENGTH_LONG).show();
-             /*  Intent intent = new Intent(mode2.this, prosto.class);
-                startActivity(intent);*/
-                life = 3;
-              /*  try {
-                    showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
-                } catch (NumberFormatException e) {
-                    // method ignores invalid (non-integer) input and waits
-                    // for something it can use
-                }
-                lifetv.setText("lifes: " + life);
-                result = 0;
-                resultview.setText("" + result);*/
-            }
-        });
-
-
-
-        /*try {
-            showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
-        } catch (NumberFormatException e) {
-            // method ignores invalid (non-integer) input and waits
-            // for something it can use
-        }*/
-        r = new Random();
-        life = 3;
-        lifetv.setText("lifes:"+life);
-        countdownDisplay.setText("Time");
-        tv.setText("Examples");
-        record =mSettings2.getInt(APP_PREFERENCES_COUNTER, 0);
-        recordview.setText("record: "+record);
-        //numgenerate();//generate generate
-        begin.setEnabled(true);
-    }
-
-
     public void onClick1 (View view)
     {
         switch (i)
@@ -604,11 +355,12 @@ public class mode2 extends Activity {
             life--;
             lifetv.setText("lifes: "+life);
             if (life <= 0)
-            {timer.cancel();
+            {
+                timer.cancel();
                 end();
             }
         }
-        numgenerate();
+        generate1();
         if (life!=0) {
             try {
                 showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
@@ -647,7 +399,8 @@ public class mode2 extends Activity {
             life--;
             lifetv.setText("lifes: "+life);
             if (life <= 0)
-            {timer.cancel();
+            {
+                timer.cancel();
                 end();
             }
         }
@@ -659,7 +412,7 @@ public class mode2 extends Activity {
                 // for something it can use
             }
         }
-        numgenerate();
+        generate1();
     }
 
     public void onClick3 (View view)
@@ -702,7 +455,7 @@ public class mode2 extends Activity {
                 // for something it can use
             }
         }
-        numgenerate();
+        generate1();
     }
 
     public void onClick4 (View view)
@@ -733,11 +486,12 @@ public class mode2 extends Activity {
             life--;
             lifetv.setText("lifes: "+life);
             if (life <= 0)
-            {timer.cancel();
+            {
+                timer.cancel();
                 end();
             }
         }
-        numgenerate();
+        generate1();
         if (life!=0) {
             try {
                 showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
@@ -753,7 +507,7 @@ public class mode2 extends Activity {
         button2.setEnabled(true);
         button3.setEnabled(true);
         button4.setEnabled(true);
-        numgenerate();
+        generate1();
         try {
             showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
         } catch (NumberFormatException e) {
@@ -766,7 +520,7 @@ public class mode2 extends Activity {
     public void back(View view)
     {
         if(timer != null) { timer.cancel(); }
-        Intent intent = new Intent(mode2.this, MainActivity.class);
+        Intent intent = new Intent(lvl1.this, sum.class);
         startActivity(intent);
         finish();
     }
@@ -775,5 +529,4 @@ public class mode2 extends Activity {
 
         finish();
     }
-
 }

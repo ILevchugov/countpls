@@ -26,16 +26,19 @@ public class MainActivity extends Activity {
     public void rejim1(View view) {
         Intent intent = new Intent(MainActivity.this, mode1.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.diagonaltranslate,R.anim.alpha);
 
     }
 
     public void rejim2(View view) {
         Intent intent = new Intent(MainActivity.this, mode2.class);
         startActivity(intent);
-
+        overridePendingTransition(R.anim.diagonaltranslate, R.anim.alpha);
     }
 
     public void rejim3(View v) {
+        Intent intent = new Intent(MainActivity.this, rejim3.class);
+        startActivity(intent);
 
 
 

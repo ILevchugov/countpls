@@ -22,7 +22,7 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="76dp"
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:paddingStart="12dp"
         android:singleLine="true"
         android:paddingTop="10dp" />
@@ -57,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:textSize="11dp"
         android:id="@+id/textView2"
         android:layout_marginLeft="150dp" />
 
@@ -64,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:textSize="11dp"
         android:id="@+id/textView3"
         android:layout_marginLeft="75dp"  />
 
@@ -76,7 +78,7 @@
         android:id="@+id/textView4"
 
 
-        android:textSize="30dp"
+        android:textSize="25dp"
 
         android:password="false"
         android:phoneNumber="false"
@@ -100,7 +102,7 @@
         android:layout_width="100dp"
         android:layout_height="200dp"
         android:textColor="#ff0000"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:text="Ваши жизни"
         android:id="@+id/textView5"
         android:layout_marginLeft="0dp"
