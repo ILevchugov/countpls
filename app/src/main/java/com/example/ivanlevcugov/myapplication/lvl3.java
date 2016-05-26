@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class lvl1 extends Activity {
+public class lvl3 extends Activity {
     Button button1, button2, button3, button4;
     ImageButton begin;
     TextView tv, resultview, lifetv, recordview;
@@ -97,39 +97,40 @@ public class lvl1 extends Activity {
         }.start();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lvl1);
+        setContentView(R.layout.activity_lvl3);
         pokazatel = getIntent().getExtras().getInt("lvl",pokazatel);
         if (pokazatel==1){
-            records="mysettings2";
-            counters="counter2";
-             r1=10;
+            records="mysettings31";
+            counters="counter31";
+            r1=5;
 
         }
         if (pokazatel==2){
-            records="mysettings3";
-            counters="counter3";
-            r1=50;
+            records="mysettings32";
+            counters="counter32";
+            r1=10;
 
         }
         if (pokazatel==3){
-            records="mysettings4";
-            counters="counter4";
-            r1=100;
+            records="mysettings33";
+            counters="counter33";
+            r1=20;
 
         }
         if (pokazatel==4){
-            records="mysettings5";
-            counters="counter5";
-            r1=500;
+            records="mysettings34";
+            counters="counter34";
+            r1=50;
 
         }
         if (pokazatel==5){
-            records="mysettings6";
-            counters="counter6";
-            r1=1000;
+            records="mysettings35";
+            counters="counter35";
+            r1=100;
 
         }
         APP_PREFERENCES=records;
@@ -169,7 +170,7 @@ public class lvl1 extends Activity {
         countdownDisplay.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/font1.ttf"));
 
-        context = lvl1.this;
+        context = lvl3.this;
         String title = "your result: "+result;
         String message = "You lost. Don't worry, play again?";
         String button1String = "В главное меню";
@@ -181,7 +182,7 @@ public class lvl1 extends Activity {
         ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) { //главное меню
 
-                Intent intent = new Intent(lvl1.this, MainActivity.class);
+                Intent intent = new Intent(lvl3.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -239,11 +240,9 @@ public class lvl1 extends Activity {
     }
     public void generate1()//generate +
     {
-
-        a = r.nextInt(r1)+1;
-        b = r.nextInt(r1)+1;
-        c = a + b;
-
+        a = r.nextInt(r1)+2;
+        b = r.nextInt(r1)+2;
+        c = a * b;
         for (i = 0; i<n-1; i++)
         {
             if (c<=15)
@@ -251,7 +250,7 @@ public class lvl1 extends Activity {
                 mass[i] = c + (r.nextInt(10)-5);
                 if (mass[i] == c)
                 {
-                    while (mass[i] == c)
+                    while ((mass[i] == c)&&(mass[i]<0))
                     {
                         mass[i] = c + (r.nextInt(10)-5);
                     }
@@ -264,7 +263,7 @@ public class lvl1 extends Activity {
                 mass[i] = c + (r.nextInt(20)-10);
                 if (mass[i] == c)
                 {
-                    while (mass[i] == c)
+                    while ((mass[i] == c)&&(mass[i]<0))
                     {
                         mass[i] = c + (r.nextInt(10)-5);
                     }
@@ -273,17 +272,17 @@ public class lvl1 extends Activity {
 
             if (c>=50)
             {
-                mass[i] = c + (r.nextInt(30)-15);
+                mass[i] = c + (r.nextInt(20)-10);
                 if (mass[i] == c)
                 {
-                    while (mass[i] == c)
+                    while ((mass[i] == c)&&(mass[i]<0))
                     {
                         mass[i] = c + (r.nextInt(10)-5);
                     }
                 }
             }
         }
-        tv.setText(a+"+"+b+"=");
+        tv.setText(a+"*"+b+"=");
         resultview.setText(""+result);
         mass[3] = c;
         i = r.nextInt(4);
@@ -325,8 +324,8 @@ public class lvl1 extends Activity {
                 break;
             }
         }
-
     }
+
     public void onClick1 (View view)
     {
         switch (i)
@@ -451,7 +450,7 @@ public class lvl1 extends Activity {
             try {
                 showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
             } catch (NumberFormatException e) {
-                // method ignores invalid (non-integer) input and waits
+                // method ignores invalid (non-integer) input and wait
                 // for something it can use
             }
         }
@@ -520,15 +519,17 @@ public class lvl1 extends Activity {
     public void back(View view)
     {
         if(timer != null) { timer.cancel(); }
-        Intent intent = new Intent(lvl1.this, sum.class);
+        Intent intent = new Intent(lvl3.this, umnoj.class);
         startActivity(intent);
         finish();
     }
     public void onBackPressed() {
         if(timer != null) { timer.cancel(); }
-        Intent intent = new Intent(lvl1.this, sum.class);
+        Intent intent = new Intent(lvl3.this, umnoj.class);
         startActivity(intent);
+
 
         finish();
     }
 }
+

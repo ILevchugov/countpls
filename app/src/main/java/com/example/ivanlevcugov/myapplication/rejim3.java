@@ -23,7 +23,15 @@ public class rejim3 extends Activity {
         startActivity(intent);
 
     }
+    public void vich(View view) {
+        Intent intent = new Intent(rejim3.this, vich.class);
+        startActivity(intent);
 
+    }
+    public void umnoj(View view) {
+        Intent intent = new Intent(rejim3.this, umnoj.class);
+        startActivity(intent);
+    }
 
 
 }

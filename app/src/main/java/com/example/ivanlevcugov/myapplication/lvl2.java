@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class lvl1 extends Activity {
+public class lvl2 extends Activity {
     Button button1, button2, button3, button4;
     ImageButton begin;
     TextView tv, resultview, lifetv, recordview;
@@ -103,32 +103,32 @@ public class lvl1 extends Activity {
         setContentView(R.layout.activity_lvl1);
         pokazatel = getIntent().getExtras().getInt("lvl",pokazatel);
         if (pokazatel==1){
-            records="mysettings2";
-            counters="counter2";
-             r1=10;
+            records="mysettings21";
+            counters="counter21";
+            r1=10;
 
         }
         if (pokazatel==2){
-            records="mysettings3";
-            counters="counter3";
+            records="mysettings22";
+            counters="counter22";
             r1=50;
 
         }
         if (pokazatel==3){
-            records="mysettings4";
-            counters="counter4";
+            records="mysettings23";
+            counters="counter23";
             r1=100;
 
         }
         if (pokazatel==4){
-            records="mysettings5";
-            counters="counter5";
+            records="mysettings24";
+            counters="counter24";
             r1=500;
 
         }
         if (pokazatel==5){
-            records="mysettings6";
-            counters="counter6";
+            records="mysettings25";
+            counters="counter25";
             r1=1000;
 
         }
@@ -169,7 +169,7 @@ public class lvl1 extends Activity {
         countdownDisplay.setTypeface(Typeface.createFromAsset(
                 getAssets(), "fonts/font1.ttf"));
 
-        context = lvl1.this;
+        context = lvl2.this;
         String title = "your result: "+result;
         String message = "You lost. Don't worry, play again?";
         String button1String = "В главное меню";
@@ -181,7 +181,7 @@ public class lvl1 extends Activity {
         ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) { //главное меню
 
-                Intent intent = new Intent(lvl1.this, MainActivity.class);
+                Intent intent = new Intent(lvl2.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -239,53 +239,52 @@ public class lvl1 extends Activity {
     }
     public void generate1()//generate +
     {
-
         a = r.nextInt(r1)+1;
         b = r.nextInt(r1)+1;
         c = a + b;
 
         for (i = 0; i<n-1; i++)
         {
-            if (c<=15)
+            if (b<=15)
             {
-                mass[i] = c + (r.nextInt(10)-5);
-                if (mass[i] == c)
+                mass[i] = b + (r.nextInt(10)-5);
+                if (mass[i] == b)
                 {
-                    while (mass[i] == c)
+                    while (mass[i] == b)
                     {
-                        mass[i] = c + (r.nextInt(10)-5);
+                        mass[i] = b + (r.nextInt(10)-5);
                     }
                 }
             }
 
-            if ((c>15) && (c<50))
+            if ((b>15) && (b<50))
             {
 
-                mass[i] = c + (r.nextInt(20)-10);
-                if (mass[i] == c)
+                mass[i] = b + (r.nextInt(20)-10);
+                if (mass[i] == b)
                 {
-                    while (mass[i] == c)
+                    while (mass[i] == b)
                     {
-                        mass[i] = c + (r.nextInt(10)-5);
+                        mass[i] = b + (r.nextInt(10)-5);
                     }
                 }
             }
 
-            if (c>=50)
+            if (b>=50)
             {
-                mass[i] = c + (r.nextInt(30)-15);
-                if (mass[i] == c)
+                mass[i] = b + (r.nextInt(20)-10);
+                if (mass[i] == b)
                 {
-                    while (mass[i] == c)
+                    while (mass[i] == b)
                     {
-                        mass[i] = c + (r.nextInt(10)-5);
+                        mass[i] = b + (r.nextInt(10)-5);
                     }
                 }
             }
         }
-        tv.setText(a+"+"+b+"=");
+        tv.setText(c+"-"+a+"=");
         resultview.setText(""+result);
-        mass[3] = c;
+        mass[3] = b;
         i = r.nextInt(4);
 
         switch (i)
@@ -327,6 +326,7 @@ public class lvl1 extends Activity {
         }
 
     }
+
     public void onClick1 (View view)
     {
         switch (i)
@@ -451,7 +451,7 @@ public class lvl1 extends Activity {
             try {
                 showTimer1(SECONDS_TO_COUNTDOWN * MILLIS_PER_SECOND);
             } catch (NumberFormatException e) {
-                // method ignores invalid (non-integer) input and waits
+                // method ignores invalid (non-integer) input and wait
                 // for something it can use
             }
         }
@@ -520,14 +520,15 @@ public class lvl1 extends Activity {
     public void back(View view)
     {
         if(timer != null) { timer.cancel(); }
-        Intent intent = new Intent(lvl1.this, sum.class);
+        Intent intent = new Intent(lvl2.this, vich.class);
         startActivity(intent);
         finish();
     }
     public void onBackPressed() {
         if(timer != null) { timer.cancel(); }
-        Intent intent = new Intent(lvl1.this, sum.class);
+        Intent intent = new Intent(lvl2.this, vich.class);
         startActivity(intent);
+
 
         finish();
     }

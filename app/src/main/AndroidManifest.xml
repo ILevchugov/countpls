@@ -34,6 +34,14 @@
         </activity>
         <activity android:name=".lvl1" >
         </activity>
+        <activity android:name=".lvl2" >
+        </activity>
+        <activity android:name=".vich" >
+        </activity>
+        <activity android:name=".umnoj" >
+        </activity>
+        <activity android:name=".lvl3" >
+        </activity>
     </application>
 
 </manifest>
